@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Big Centered AR Video</title>
+    <title>Centered AR Video</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
   </head>
@@ -16,24 +16,30 @@
           muted
           playsinline
           webkit-playsinline
+          crossorigin="anonymous"
         ></video>
       </a-assets>
 
+      <!-- Marker -->
       <a-marker type="pattern" url="pattern-ar_marker.patt">
-        <a-video
-          src="#my-video"
-          width="6"
-          height="3.375"
-          position="0 3 0"
-          rotation="-90 0 0"
-        ></a-video>
+        <!-- Put a container entity to control position/rotation -->
+        <a-entity position="0 0 0">
+          <a-video
+            src="#my-video"
+            width="6"
+            height="3.4"
+            position="0 0 1" <!-- Video placed in front of camera -->
+            rotation="0 0 0" <!-- No rotation -->
+          ></a-video>
+        </a-entity>
       </a-marker>
 
+      <!-- Camera -->
       <a-entity camera></a-entity>
     </a-scene>
 
+    <!-- Auto play on click -->
     <script>
-      // Play on click
       window.addEventListener('click', () => {
         const video = document.querySelector('#my-video');
         if (video && video.paused) {
