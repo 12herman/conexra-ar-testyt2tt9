@@ -1,17 +1,80 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <script src="./aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <meta charset="utf-8" />
+    <title>AR.js Image Tracking with Video</title>
+
+    <!-- A-Frame and AR.js (NFT version) -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- Optional loader style -->
+    <style>
+      .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+      }
+    </style>
   </head>
-  <body style="margin: 0; overflow: hidden">
-    <a-scene embedded arjs>
-      <a-marker type="pattern" url="pattern-black.patt">
-        <a-video src="#my-video" width="2" height="1" position="0 0.5 0"></a-video>
-      </a-marker>
+
+  <body style="margin: 0; overflow: hidden;">
+    <!-- Loading screen while NFT data is prepared -->
+    <div class="arjs-loader">
+      <div>Loading, please wait...</div>
+    </div>
+
+    <!-- A-Frame scene with NFT image tracking -->
+    <a-scene
+      embedded
+      vr-mode-ui="enabled: false"
+      renderer="logarithmicDepthBuffer: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
+      <!-- Assets (video file) -->
       <a-assets>
-        <video id="my-video" src="./video.mp4" autoplay loop muted playsinline></video>
+        <video
+          id="my-video"
+          src="video.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          crossorigin="anonymous"
+        ></video>
       </a-assets>
-      
+
+      <!-- NFT image tracking setup -->
+      <a-nft
+        type="nft"
+        url="nft-assets/my-image/my-image"
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance="0.01"
+        smoothThreshold="5">
+
+        <!-- Video that appears when image is scanned -->
+        <a-video
+          src="#my-video"
+          width="2"
+          height="1"
+          position="0 0 0.1"
+        ></a-video>
+      </a-nft>
+
+      <!-- Static camera -->
       <a-entity camera></a-entity>
     </a-scene>
   </body>
