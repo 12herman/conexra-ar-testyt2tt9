@@ -22,96 +22,23 @@
       <a-marker type="pattern" url="pattern-ar_marker.patt">
         <a-video
           src="#my-video"
-          width="2"
-          height="1"
-          position="0 0 0.1"
+          width="4"
+          height="2"
+          position="0 0.5 0"
+          rotation="-90 0 0"
         ></a-video>
       </a-marker>
 
       <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+      window.addEventListener('click', () => {
+        const video = document.querySelector('#my-video');
+        if (video && video.paused) {
+          video.play();
+        }
+      });
+    </script>
   </body>
 </html>
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>AR Video with NFT Image</title>
-
-
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-
-    <style>
-      .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(255, 255, 255, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-      }
-    </style>
-  </head>
-
-  <body style="margin: 0; overflow: hidden">
-
-    <div class="arjs-loader">
-      <div>Loading, please wait...</div>
-    </div>
-
-
-    <a-scene
-      embedded
-      vr-mode-ui="enabled: false"
-      renderer="logarithmicDepthBuffer: true;"
-      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-
-
-      <a-assets>
-        <video
-          id="my-video"
-          src="video.mp4"
-          autoplay
-          loop
-          muted
-          playsinline
-          preload="auto"
-          crossorigin="anonymous"
-        ></video>
-      </a-assets>
-
-
-      <a-nft
-        type="nft"
-        url="nft-assets/my-image/my-image"
-        smooth="true"
-        smoothCount="10"
-        smoothTolerance="0.01"
-        smoothThreshold="5">
-        
-
-        <a-video
-          src="#my-video"
-          width="2"
-          height="1"
-          position="0 0 0.1"
-        ></a-video>
-      </a-nft>
-
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
-</html> -->
